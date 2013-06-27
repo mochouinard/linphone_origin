@@ -423,8 +423,7 @@ static void linphone_gtk_assistant_prepare(GtkWidget *assistant, GtkWidget *page
 		gchar *username = creator->username + 4;
 		const gchar *needle = "@";
 		username = g_strndup(username, (g_strrstr(username, needle) - username));
-		gchar domain[128];
-		g_snprintf(domain, sizeof(domain), "\"%s\"", creator->domain + 4);
+		gchar *domain = g_strrstr(creator->username, needle) + 1;
 		LinphoneAuthInfo *info=linphone_auth_info_new(username, username, creator->password, NULL, domain);
 		linphone_core_add_auth_info(linphone_gtk_get_core(),info);
 
